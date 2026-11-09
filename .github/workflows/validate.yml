@@ -1,0 +1,25 @@
+name: validate
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Scripts parse
+        run: npm run check
+      - name: Skill has its frontmatter
+        run: |
+          head -1 SKILL.md | grep -qx -- '---'
+          grep -q '^name: reel-level-site' SKILL.md
+          grep -q '^description: ' SKILL.md
+      - name: Every reference in SKILL.md exists
+        run: |
+          for f in references/craft-floor.md references/journey-patterns.md references/assets.md templates/Demo.jsx scripts/audit.mjs scripts/record.mjs; do
+            test -f "$f"
+          done

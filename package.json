@@ -1,0 +1,15 @@
+{
+  "name": "reel-level-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Claude Code skill: rebuild any website as a scroll experience worth filming.",
+  "license": "MIT",
+  "scripts": {
+    "check": "node --check scripts/audit.mjs && node --check scripts/record.mjs"
+  },
+  "dependencies": {
+    "ffmpeg-static": "^5.2.0",
+    "puppeteer-core": "^24.0.0"
+  }
+}
